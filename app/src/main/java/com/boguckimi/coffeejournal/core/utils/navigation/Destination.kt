@@ -1,8 +1,11 @@
 package com.boguckimi.coffeejournal.core.utils.navigation
 
+import com.boguckimi.coffeejournal.core.utils.navigation.baseDataObject.BaseEntryDataObject
+import com.boguckimi.coffeejournal.core.utils.navigation.baseDataObject.BaseResultDataObject
+
 /**
  * An abstract class representing a destination in the navigation graph.
  *
- * @param T The type of data associated with the destination.
+ * @param ENTRY The type of data associated with the destination.
  */
-abstract class Destination<T> : EmptyDestination
+abstract class Destination<ENTRY: BaseEntryDataObject, RESULT : BaseResultDataObject> : EmptyDestination<RESULT>

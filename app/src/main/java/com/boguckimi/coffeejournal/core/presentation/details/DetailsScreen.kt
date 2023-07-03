@@ -1,11 +1,24 @@
 package com.boguckimi.coffeejournal.core.presentation.details
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
 fun DetailsScreen(
-    uiState: Details.EntryDataObject
+    uiState: Details.UiState,
+    onEditDescriptionClicked: () -> Unit,
 ) {
-    Text(text = "Details: $uiState")
+    Column {
+        Text("Product name: ${uiState.productName}")
+        Text("Product id: ${uiState.productId}")
+        Text("Description: ${uiState.description}")
+
+        Button(
+            onClick = onEditDescriptionClicked
+        ) {
+            Text("Edit Description")
+        }
+    }
 }

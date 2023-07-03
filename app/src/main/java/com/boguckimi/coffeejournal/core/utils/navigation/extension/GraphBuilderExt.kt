@@ -8,6 +8,8 @@ import com.boguckimi.coffeejournal.core.utils.navigation.Destination
 import com.boguckimi.coffeejournal.core.utils.navigation.ENTRY_DATA_OBJECT_KEY
 import com.boguckimi.coffeejournal.core.utils.navigation.EmptyDestination
 import com.boguckimi.coffeejournal.core.utils.navigation.NavTypeRegistry
+import com.boguckimi.coffeejournal.core.utils.navigation.baseDataObject.BaseEntryDataObject
+import com.boguckimi.coffeejournal.core.utils.navigation.baseDataObject.BaseResultDataObject
 
 
 /**
@@ -15,19 +17,19 @@ import com.boguckimi.coffeejournal.core.utils.navigation.NavTypeRegistry
  *
  * @param destination The destination object.
  */
-inline fun <reified T> NavGraphBuilder.destination(
+inline fun <reified ENTRY : BaseEntryDataObject, reified RESULT : BaseResultDataObject> NavGraphBuilder.destination(
     navController: NavHostController,
-    destination: Destination<T>,
+    destination: Destination<ENTRY, RESULT>,
 ) {
     composable(
         route = "${destination.route}/{$ENTRY_DATA_OBJECT_KEY}",
         arguments = listOf(
             navArgument(
                 name = ENTRY_DATA_OBJECT_KEY,
-                builder = { type = NavTypeRegistry.getType<T>() }
+                builder = { type = NavTypeRegistry.getType<ENTRY>() }
             )
         ),
-        content = { destination.Route(navController) }
+        content = { navBackStackEntry -> destination.Route(navController, navBackStackEntry) }
     )
 }
 
@@ -37,12 +39,12 @@ inline fun <reified T> NavGraphBuilder.destination(
  *
  * @param destination The empty destination object.
  */
-fun NavGraphBuilder.emptyDestination(
+inline fun <reified RESULT : BaseResultDataObject> NavGraphBuilder.emptyDestination(
     navController: NavHostController,
-    destination: EmptyDestination,
+    destination: EmptyDestination<RESULT>,
 ) {
     composable(
         route = destination.route,
-        content = { destination.Route(navController) },
+        content = { navBackStackEntry -> destination.Route(navController, navBackStackEntry) },
     )
 }
