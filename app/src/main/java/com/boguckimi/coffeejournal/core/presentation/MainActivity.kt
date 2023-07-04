@@ -13,7 +13,6 @@ import com.boguckimi.coffeejournal.core.presentation.details.Details
 import com.boguckimi.coffeejournal.core.presentation.list.ProductsList
 import com.boguckimi.coffeejournal.core.ui.theme.CoffeeJournalTheme
 import com.boguckimi.coffeejournal.core.utils.navigation.extension.destination
-import com.boguckimi.coffeejournal.core.utils.navigation.extension.emptyDestination
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,9 +25,9 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     val navController = rememberNavController()
                     NavHost(navController, ProductsList.route) {
-                        emptyDestination(navController, ProductsList)
+                        destination(navController, ProductsList)
                         destination(navController, Details)
-                        emptyDestination(navController, Description)
+                        destination(navController, Description)
                     }
                 }
             }

@@ -16,7 +16,6 @@ fun ListScreen(
     uiState: ProductsList.UiState,
     onListItemClicked: (Details.EntryDataObject) -> Unit = {}
 ) {
-
     LazyColumn {
         items(uiState.items) { (name, id) ->
             ListItem(
@@ -24,7 +23,7 @@ fun ListScreen(
                     onListItemClicked(
                         Details.EntryDataObject(
                             id = id,
-                            name = name
+                            name = name,
                         )
                     )
                 },

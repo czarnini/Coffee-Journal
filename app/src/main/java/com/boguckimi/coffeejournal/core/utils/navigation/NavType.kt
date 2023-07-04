@@ -10,6 +10,7 @@ object NavTypeRegistry {
 
     val typeRegistry = mutableMapOf<String, NavType<*>>()
 
+    @Suppress("UNCHECKED_CAST")
     inline fun <reified T> getType() =
         typeRegistry[T::class.java.name] as? NavType<T> ?: addNewNavTypeToRegistry()
 
@@ -37,7 +38,5 @@ object NavTypeRegistry {
          */
         override fun serializeAsValue(value: T): String =
             Json.encodeToString(value)
-    }.also { newNavType ->
-        typeRegistry[T::class.java.name] = newNavType
-    }
+    }.also { typeRegistry[T::class.java.name] = it }
 }

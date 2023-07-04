@@ -13,4 +13,6 @@ import com.boguckimi.coffeejournal.core.utils.navigation.baseDataObject.BaseEntr
  * @return The data object associated with the destination, or an empty object if not found.
  */
 inline fun <reified ENTRY : BaseEntryDataObject> SavedStateHandle.entryDataObject() =
-    NavTypeRegistry.getType<ENTRY>().parseValue(get<String>(ENTRY_DATA_OBJECT_KEY).orEmpty())
+    NavTypeRegistry
+        .getType<ENTRY>()
+        .parseValue(get<String>(ENTRY_DATA_OBJECT_KEY).orEmpty())

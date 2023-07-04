@@ -6,12 +6,13 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
-import com.boguckimi.coffeejournal.core.utils.navigation.EmptyDestination
+import com.boguckimi.coffeejournal.core.utils.navigation.Destination
 import com.boguckimi.coffeejournal.core.utils.navigation.baseDataObject.BaseResultDataObject
+import com.boguckimi.coffeejournal.core.utils.navigation.baseDataObject.EmptyEntryDataObject
 import com.boguckimi.coffeejournal.core.utils.navigation.extension.finishWihResult
 import kotlinx.serialization.Serializable
 
-object Description : EmptyDestination<Description.ResultDataObject> {
+object Description : Destination<EmptyEntryDataObject, Description.ResultDataObject>() {
     override val route = "description"
 
     @Composable
